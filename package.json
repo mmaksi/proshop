@@ -1,0 +1,23 @@
+{
+  "name": "proshop",
+  "version": "1.0.0",
+  "description": "MERN e-commerce web app",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm start --prefix server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mmaksi/proshop.git"
+  },
+  "keywords": [
+    "ecommerce",
+    "mern"
+  ],
+  "author": "Mark Maksi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mmaksi/proshop/issues"
+  },
+  "homepage": "https://github.com/mmaksi/proshop#readme"
+}
