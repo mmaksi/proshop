@@ -1,16 +1,9 @@
-const products = require("../../../data/products");
+const Products = require("./products.mongo");
 
-const productsModel = require("./products.mongo");
-
-const getAllLaunches = async (skip, limit) => {
-  return await launchesModel
+const getAllProducts = async () => {
+  return await Products
     .find({}, { __v: 0, _id: 0 })
-    .sort({ flightNumber: 1 })
-    .skip(skip)
-    .limit(limit);
-}
+    .sort({ _id: 1 })
+};
 
-
-
-
-module.exports = products;
+module.exports = { getAllProducts };

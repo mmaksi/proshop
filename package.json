@@ -4,7 +4,7 @@
   "description": "MERN e-commerce web app",
   "main": "server.js",
   "scripts": {
-    "server": "npm run watch --prefix server",
+    "server": "npm run data:import && npm run watch --prefix server",
     "client": "npm start --prefix client",
     "watch": "npm run server & npm run client",
     "install-server": "cd server && npm install",
