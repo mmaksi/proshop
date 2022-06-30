@@ -1,14 +1,20 @@
 import { Link, useParams } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Card, Button } from "react-bootstrap";
+import { Row, Col, Image, ListGroup, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
-import products from "../products";
+import { useEffect, useState } from "react";
+import { getData } from "../utils/data.utils";
 
 const ProductScreen = () => {
+  const [product, setProduct] = useState({})
   const { id: productId } = useParams();
 
-  const product = products.find(
-    (product) => Number(product._id) === Number(productId)
-  );
+  useEffect(() => {
+    const getProduct = async () => {
+      const fetchedProduct = await getData(`/v1/products/${productId}`);
+      setProduct(fetchedProduct)
+    }
+    getProduct()
+  }, [productId]);
 
   const addToCartHandler = () => {};
 

@@ -4,7 +4,12 @@
   "description": "MERN e-commerce web app",
   "main": "server.js",
   "scripts": {
-    "start": "npm start --prefix server"
+    "server": "npm run watch --prefix server",
+    "client": "npm start --prefix client",
+    "watch": "npm run server & npm run client",
+    "install-server": "cd server && npm install",
+    "install-client": "cd client && npm install",
+    "deploy": "npm run build --prefix client && npm start --prefix server"
   },
   "repository": {
     "type": "git",
