@@ -9,6 +9,8 @@
     "watch": "npm run server & npm run client",
     "install-server": "cd server && npm install",
     "install-client": "cd client && npm install",
+    "data:import": "node server/src/seeder",
+    "data:destroy": "node server/src/seeder -d",
     "deploy": "npm run build --prefix client && npm start --prefix server"
   },
   "repository": {
