@@ -1,15 +1,14 @@
-const { getAllProducts } = require("../../models/products/products.model");
+const { getAllProducts, getProduct } = require("../../models/products/products.model");
 
 const httpGetAllProducts = async (req, res) => {
   const products = await getAllProducts();
-  res.json(products);
+  return res.status(200).json(products);
 };
 
-const httpGetProduct = (req, res) => {
-  const product = products.find(
-    (product) => Number(product._id) === Number(req.params.id)
-  );
-  res.json(product);
+const httpGetProduct = async ({params}, res) => {
+  const product = await getProduct(params.id)
+  if (product) return res.status(200).json(product);
+  return res.status(404).json({ message: "Product not found"});
 };
 
 module.exports = {

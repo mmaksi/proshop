@@ -11,7 +11,7 @@ const ProductScreen = () => {
   useEffect(() => {
     const getProduct = async () => {
       const fetchedProduct = await getData(`/v1/products/${productId}`);
-      setProduct(fetchedProduct)
+      setProduct(fetchedProduct[0])
     }
     getProduct()
   }, [productId]);

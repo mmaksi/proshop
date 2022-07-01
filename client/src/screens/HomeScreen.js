@@ -5,10 +5,11 @@ import { getData } from "../utils/data.utils";
 
 const HomeScreen = () => {
   const [products, setProducts] = useState([]);
+  console.log("products", products)
 
   useEffect(() => {
     const getProducts = async () => {
-      const fetchedProducts = await getData("http://localhost:8000/v1/products");
+      const fetchedProducts = await getData("v1/products");
       setProducts(fetchedProducts)
     }
     getProducts()
