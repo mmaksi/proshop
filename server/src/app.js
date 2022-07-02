@@ -19,6 +19,8 @@ app.use("/v1", api);
 app.use("/v1", notFound);
 app.use(errorHandler);
 
-// app.get("/*", reactRouterHandler);
+// app.get("/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "..", "public", "index.html"));
+// });
 
 module.exports = app;

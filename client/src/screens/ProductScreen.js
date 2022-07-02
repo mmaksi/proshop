@@ -1,22 +1,27 @@
-import { Link, useParams } from "react-router-dom";
-import { Row, Col, Image, ListGroup, Button } from "react-bootstrap";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { Row, Col, Image, ListGroup, Button, Form } from "react-bootstrap";
 import Rating from "../components/Rating";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import fetchProductStartAsync from "../store/productDetails/productDetails.action";
 import { selectProductDetails } from "../store/productDetails/productDetails.selector";
 
 const ProductScreen = () => {
+  const [qty, setQty] = useState(0)
   const { id: productId } = useParams();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     dispatch(fetchProductStartAsync(productId));
   }, [dispatch, productId]);
 
-  const product = useSelector(selectProductDetails)
+  const product = useSelector(selectProductDetails);
 
-  const addToCartHandler = () => {};
+  const addToCartHandler = () => {
+    navigate(`/cart/${productId}?qty=${qty}`)
+  };
 
   return (
     <>
@@ -61,6 +66,26 @@ const ProductScreen = () => {
                 </Col>
               </Row>
             </ListGroup.Item>
+
+            {product.countInStock > 0 && (
+              <ListGroup.Item>
+                <Row>
+                  <Col>Quantity:</Col>
+                  <Col>
+                    <Form.Select
+                      value={qty}
+                      onChange={(e) => setQty(e.target.value)}
+                    >
+                      {[...Array(product.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            )}
 
             <ListGroup.Item>
               <Button

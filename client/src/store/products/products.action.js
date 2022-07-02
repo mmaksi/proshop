@@ -7,7 +7,7 @@ const fetchProductsStartAsync = () => async (dispatch) => {
   dispatch(fetchProductsStart());
   try {
     // dispatch success action
-    const response = await axios.get("/v1/products");
+    const response = await axios.get(`http://localhost:8000/v1/products`);
     const products = await response.data;
     dispatch(fetchProductsSuccess(products));
   } catch (error) {
