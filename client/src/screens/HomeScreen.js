@@ -1,33 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Col, Row } from "react-bootstrap";
 import Product from "../components/Product";
-import { getData } from "../utils/data.utils";
+import fetchProductsStartAsync from "../store/products/products.action";
+import {
+  selectProducts,
+  selectProductsIsLoading,
+  selectProductsIsLoadingError,
+} from "../store/products/products.selector";
+import Loader from "../components/Loader";
+import Message from "../components/Message";
 
 const HomeScreen = () => {
-  const [products, setProducts] = useState([]);
-  console.log("products", products)
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const getProducts = async () => {
-      const fetchedProducts = await getData("v1/products");
-      setProducts(fetchedProducts)
-    }
-    getProducts()
-  }, []);
+    dispatch(fetchProductsStartAsync());
+  }, [dispatch]);
+
+  const products = useSelector(selectProducts);
+  const isLoading = useSelector(selectProductsIsLoading);
+  const error = useSelector(selectProductsIsLoadingError);
 
   return (
-    <div>
+    <>
       <h1>Latest Products</h1>
-      <Row>
-        {products.map((product) => {
-          return (
-            <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-              <Product product={product} />
-            </Col>
-          );
-        })}
-      </Row>
-    </div>
+      {isLoading ? (
+        <Loader />
+      ) : error ? (
+        <Message variant='danger'>Error loading data</Message>
+      ) : (
+        <Row>
+          {products.map((product) => {
+            return (
+              <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
+                <Product product={product} />
+              </Col>
+            );
+          })}
+        </Row>
+      )}
+    </>
   );
 };
 
