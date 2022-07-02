@@ -9,7 +9,6 @@ const fetchProductsStartAsync = () => async (dispatch) => {
     // dispatch success action
     const response = await axios.get("/v1/products");
     const products = await response.data;
-    console.log(products)
     dispatch(fetchProductsSuccess(products));
   } catch (error) {
     // dispatch failure action

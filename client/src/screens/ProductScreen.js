@@ -1,20 +1,20 @@
 import { Link, useParams } from "react-router-dom";
 import { Row, Col, Image, ListGroup, Button } from "react-bootstrap";
 import Rating from "../components/Rating";
-import { useEffect, useState } from "react";
-import { getData } from "../utils/data.utils";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import fetchProductStartAsync from "../store/productDetails/productDetails.action";
+import { selectProductDetails } from "../store/productDetails/productDetails.selector";
 
 const ProductScreen = () => {
-  const [product, setProduct] = useState({})
   const { id: productId } = useParams();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    const getProduct = async () => {
-      const fetchedProduct = await getData(`/v1/products/${productId}`);
-      setProduct(fetchedProduct[0])
-    }
-    getProduct()
-  }, [productId]);
+    dispatch(fetchProductStartAsync(productId));
+  }, [dispatch, productId]);
+
+  const product = useSelector(selectProductDetails)
 
   const addToCartHandler = () => {};
 

@@ -18,7 +18,6 @@ export const productsListReducer = (
     case PRODUCTS_ACTION_TYPES.FETCH_PRODUCTS_SUCCESS:
       return { ...state, isLoading: false, products: payload };
     case PRODUCTS_ACTION_TYPES.FETCH_PRODUCTS_FAILED:
-      console.log("recieved from the action")
       return { ...state, error: payload };
     default:
       return state;

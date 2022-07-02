@@ -9,13 +9,6 @@ export const selectProducts = createSelector(
   }
 );
 
-export const selectProduct = createSelector(
-  [selectProductsReducer],
-  (productsReducer) => {
-    return productsReducer.products;
-  }
-);
-
 export const selectProductsIsLoading = createSelector(
   [selectProductsReducer],
   (productsReducer) => productsReducer.isLoading
